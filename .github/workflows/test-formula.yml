@@ -1,0 +1,61 @@
+# Installs the tap the way a user does (tap the public repo URL, brew
+# install) and asserts the installed version. The formula pins release
+# v0.1.0, so the assertion pins the same version; bump the assertion in
+# the same commit as a formula version bump.
+#
+# No GitHub Actions are used, so there is nothing to SHA-pin, and no
+# checkout means no persisted credentials exist in the first place
+# (permissions: contents: read).
+name: test formula
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "Formula/**"
+      - ".github/workflows/test-formula.yml"
+
+concurrency:
+  group: test-formula-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  macos-arm64:
+    name: brew install (macos arm64, v0.1.0)
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - name: Tap and install
+        run: |
+          set -eu
+          brew tap fluxvale/dashfloat https://github.com/fluxvale/homebrew-tap
+          brew install fluxvale/dashfloat/dashfloat
+
+      - name: dashfloat --version must answer dashfloat 0.1.0
+        run: |
+          set -eu
+          command -v dashfloat
+          dashfloat --version
+          test "$(dashfloat --version)" = "dashfloat 0.1.0"
+
+  macos-intel:
+    name: brew install (macos x86_64, v0.1.0)
+    runs-on: macos-15-intel
+    timeout-minutes: 20
+    steps:
+      - name: Tap and install
+        run: |
+          set -eu
+          brew tap fluxvale/dashfloat https://github.com/fluxvale/homebrew-tap
+          brew install fluxvale/dashfloat/dashfloat
+
+      - name: dashfloat --version must answer dashfloat 0.1.0
+        run: |
+          set -eu
+          command -v dashfloat
+          dashfloat --version
+          test "$(dashfloat --version)" = "dashfloat 0.1.0"
