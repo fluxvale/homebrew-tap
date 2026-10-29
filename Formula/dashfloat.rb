@@ -1,20 +1,20 @@
 class Dashfloat < Formula
   desc "Command-line AI coding harness with a terminal UI"
   homepage "https://dashfloat.com"
-  version "0.1.1"
+  version "0.2.0"
   license "MIT"
 
   # Self-contained mix-release tarballs: the BEAM release plus its bundled
   # ERTS, so the formula carries no runtime dependencies. One tarball per
-  # platform, published on the v0.1.1 GitHub release; every sha256 below was
-  # cross-checked against that release's dashfloat-0.1.1-sha256sums.txt.
+  # platform, published on the v0.2.0 GitHub release; every sha256 below was
+  # cross-checked against that release's dashfloat-0.2.0-sha256sums.txt.
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/fluxvale/dashfloat/releases/download/v0.1.1/dashfloat-0.1.1-aarch64-apple-darwin.tar.gz"
-      sha256 "f746b4117893a1b871de9d0d90fee155dc96f7461ee6c8fcbe2ab7dbbb57099f"
+      url "https://github.com/fluxvale/dashfloat/releases/download/v0.2.0/dashfloat-0.2.0-aarch64-apple-darwin.tar.gz"
+      sha256 "20be5819472c328021d2d18141df50a20f5d8626c69911d26330aef9669d2745"
     else
-      url "https://github.com/fluxvale/dashfloat/releases/download/v0.1.1/dashfloat-0.1.1-x86_64-apple-darwin.tar.gz"
-      sha256 "bda11615045fdce702761dbc6f44a6694bbb764539e93c72119e9b1919fb57e6"
+      url "https://github.com/fluxvale/dashfloat/releases/download/v0.2.0/dashfloat-0.2.0-x86_64-apple-darwin.tar.gz"
+      sha256 "b46f54c985ad9d03208c8232e31e2e478b6a2e82d9d90dae9502906d538b1357"
     end
   end
 
@@ -22,8 +22,8 @@ class Dashfloat < Formula
     unless Hardware::CPU.intel?
       raise "dashfloat ships x86_64 Linux only; Linux arm64 and musl are not packaged."
     end
-    url "https://github.com/fluxvale/dashfloat/releases/download/v0.1.1/dashfloat-0.1.1-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "375b8c641b27499eccabd4260a9551f66efd477c52b35b181f881e51c76871c2"
+    url "https://github.com/fluxvale/dashfloat/releases/download/v0.2.0/dashfloat-0.2.0-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "256bd558ad5e1c7b1ff4d010718dc83468591a1a61b9e297099df3e9148f26bd"
   end
 
   def install
